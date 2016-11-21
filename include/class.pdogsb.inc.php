@@ -54,7 +54,8 @@ class PdoGsb{
 */
 	public function getInfosVisiteur($login, $mdp){
 		$req = "select visiteur.id as id, visiteur.nom as nom, visiteur.prenom as prenom from visiteur 
-		where visiteur.login='$login' and visiteur.mdp='$mdp'";
+                INNER JOIN utilisateur ON visiteur.login=utilisateur.login
+		where utilisateur.login='$login' and utilisateur.mdp='$mdp'";
 		$rs = $this->monPdo->query($req);
 		$ligne = $rs->fetch();
 		return $ligne;
