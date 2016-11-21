@@ -1,6 +1,7 @@
 <?php
 //commentaire de Anys
 //Commentaire de Soso ! :P
+//Commentaire de Bento Pépito Paquito Na Bendo de la Vega del Turfu de la nieve
 require_once("include/fct.inc.php");
 require_once ("include/class.pdogsb.inc.php");
 include("vues/v_entete.php") ;
@@ -24,6 +25,3 @@ switch($uc){
 }
 include("vues/v_pied.php") ;
 ?>
-
-
-//Commentaire de Bento Pépito Paquito Na Bendo de la Vega del Turfu de la nieve
