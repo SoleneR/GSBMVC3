@@ -23,3 +23,5 @@ switch($uc){
 include("vues/v_pied.php") ;
 ?>
 
+
+//Commentaire de Bento Pépito Paquito Na Bendo de la Vega del Turfu de la nieve
