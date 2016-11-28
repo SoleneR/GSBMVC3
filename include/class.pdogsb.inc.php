@@ -70,8 +70,8 @@ class PdoGsb{
         
         public function getConnexionVisiteur($login, $mdp)
         {
-            $req= "select utilisateur.login as login, utilisateur.mdp as mdp, utilisateur.derniereConnexion as derniereco, visiteur.id as id, visiteur.nom as nom, visiteur.prenom as prenom  from 
-                    utilisateur INNER JOIN visiteur ON utilisateur.id = visiteur.id
+            $req= "select utilisateur.login as loginUser, utilisateur.mdp, utilisateur.derniereConnexion, visiteur.id as idVisit, visiteur.nom, visiteur.prenom from 
+                    utilisateur INNER JOIN visiteur ON utilisateur.login = visiteur.login
                     where utilisateur.login='$login' and utilisateur.mdp='$mdp'";
             $rs = $this->monPdo->query($req);
             $ligne = $rs->fetch();
@@ -80,12 +80,20 @@ class PdoGsb{
         
         public function getConnexionComptable($login, $mdp)
         {
-            $req= "select utilisateur.login as login, utilisateur.mdp as mdp,utilisateur.derniereConnexion as derniereco, comptable.id as id, comptable.nom as nom, comptable.prenom as prenom from 
-                    utilisateur INNER JOIN comptable ON utilisateur.id = comptable.id
+            $req= "select utilisateur.login as login, utilisateur.mdp, utilisateur.derniereConnexion, comptable.id as id, comptable.nom, comptable.prenom from 
+                    utilisateur INNER JOIN comptable ON utilisateur.login = comptable.login
                     where utilisateur.login='$login' and utilisateur.mdp='$mdp'";
             $rs = $this->monPdo->query($req);
             $ligne = $rs->fetch();
             return $ligne;
+        }
+        
+        public function UpdateDate($login)
+        {
+            $req= "UPDATE utilisateur
+                   SET derniereConnexion = NOW() 
+                   where login='$login'";
+            $rs = $this->monPdo->exec($req);
         }
 
 /**
