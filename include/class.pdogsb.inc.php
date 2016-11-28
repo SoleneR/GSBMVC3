@@ -70,7 +70,7 @@ class PdoGsb{
         
         public function getConnexionVisiteur($login, $mdp)
         {
-            $req= "select utilisateur.login as loginUser, utilisateur.mdp, utilisateur.derniereConnexion, visiteur.id as idVisit, visiteur.nom, visiteur.prenom from 
+            $req= "select utilisateur.login as loginUser, utilisateur.mdp, utilisateur.derniereConnexion, visiteur.id as idVisit, visiteur.nom, visiteur.prenom, utilisateur.type from 
                     utilisateur INNER JOIN visiteur ON utilisateur.login = visiteur.login
                     where utilisateur.login='$login' and utilisateur.mdp='$mdp'";
             $rs = $this->monPdo->query($req);
@@ -80,7 +80,7 @@ class PdoGsb{
         
         public function getConnexionComptable($login, $mdp)
         {
-            $req= "select utilisateur.login as login, utilisateur.mdp, utilisateur.derniereConnexion, comptable.id as id, comptable.nom, comptable.prenom from 
+            $req= "select utilisateur.login as login, utilisateur.mdp, utilisateur.derniereConnexion, comptable.id as id, comptable.nom, comptable.prenom, utilisateur.type from 
                     utilisateur INNER JOIN comptable ON utilisateur.login = comptable.login
                     where utilisateur.login='$login' and utilisateur.mdp='$mdp'";
             $rs = $this->monPdo->query($req);
@@ -280,6 +280,26 @@ class PdoGsb{
 		$req = "delete from lignefraishorsforfait where lignefraishorsforfait.id =$idFrais ";
 		$this->monPdo->exec($req);
 	}
+        
+//        affichage pour un visiteur des fiches de frais des 12 derniers mois qui sont validés ou remboursés 
+        public function getLesVisiteursASuivre(){
+            //VA RB
+            $req ="select visiteur.id, visiteur.nom , fichefrais.idVisiteur,fichefrais.mois "
+                    . "from Etat inner join fichefrais on Etat.id = fichefrais.idEtat"
+                    . " inner join visiteur on fichefrais.idVisiteur = visiteur.id where fichefrais.idEtat ='VA' OR fichefrais.idEtat ='RB'"
+                    . "ORDER BY `fichefrais`.`mois` DESC LIMIT 0 , 12";
+            $res = $this->monPdo->query($req);
+		$laLigne = $res->fetchAll();
+		return $laLigne;
+        }
+        
+          public function getFichesFraisUtilisateurSuiviePaiement($idVisiteur){
+             $req = "SELECT * FROM fichefrais WHERE idVisiteur = '".$idVisiteur."' AND (idEtat = 'VA' || idEtat = 'RB') ORDER BY `fichefrais`.`mois` DESC LIMIT 0 , 12";
+             $res = $this->monPdo->query($req);
+             return $res;
+        
+        }
+       
 /**
  * Retourne les mois pour lesquel un visiteur a une fiche de frais
  
