@@ -1,3 +1,4 @@
+<script src="./script/ajax.js"></script>
 <?php
 require_once("include/fct.inc.php");
 require_once ("include/class.pdogsb.inc.php");
@@ -22,6 +23,9 @@ switch($uc){
         case 'suivrePaiement' :{
 		include("controleurs/c_suivrePaiement.php");break; 
 	}
+	case 'validerFrais' :{
+                include("controleurs/c_validerFrais.php");break;
+        }
 }
 include("vues/v_pied.php") ;
 ?>

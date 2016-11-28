@@ -353,5 +353,13 @@ class PdoGsb{
 		where fichefrais.idvisiteur ='$idVisiteur' and fichefrais.mois = '$mois'";
 		$this->monPdo->exec($req);
 	}
+
+	// affiche tous les visiteurs avec une fiche à l'état cloturée
+        public function getTousVisiteursAvecFicheCloturee(){
+                $req = "SELECT * FROM fichefrais INNER JOIN visiteur ON idVisiteur = id WHERE idEtat = 'CL' ORDER BY visiteur.nom asc";
+                $res = $this->monPdo->query($req);
+		$laLigne = $res->fetchAll();
+		return $laLigne;
+        }
 }
 ?>
