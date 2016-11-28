@@ -5,7 +5,7 @@ if(!isset($_REQUEST['action'])){
 $action = $_REQUEST['action'];
 switch($action){
 	case 'demandeConnexion':{
-		include("vues/v_connexion.php");
+		include("vues/v_connexion.php");  //bger
 		break;
 	}
 	case 'valideConnexion':{

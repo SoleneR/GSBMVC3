@@ -95,7 +95,7 @@ class PdoGsb{
                    where login='$login'";
             $rs = $this->monPdo->exec($req);
         }
-
+//fzefr"e
 /**
  * Retourne sous forme d'un tableau associatif toutes les lignes de frais hors forfait
  * concernées par les deux arguments
