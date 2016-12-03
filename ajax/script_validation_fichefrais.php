@@ -18,7 +18,7 @@
     $montantTotalFraisForfait = 0;
     $montantTotalFraisHorsForfait = 0;
 
-    // Execution de la fonction permettant de recevoir les détails de la fiche de frais à valider
+    // lancement de la fonction permettant de recevoir les détails de la fiche de frais à valider
     $detailsForfait = $pdo->getTousInfosMontantFicheFraisForfait($idVisiteur, $moisAnnee);
     $detailsHorsForfait = $pdo->getTousInfosMontantFicheFraisHorsForfait($idVisiteur, $moisAnnee);
 

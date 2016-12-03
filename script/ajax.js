@@ -13,7 +13,6 @@ $(document).ready(function()
         var nom = $("#ficheDuVisiteurNom" + numligne).html();
         var prenom = $("#ficheDuVisiteurPrenom" + numligne).html();
         var moisAnnee = $("#ficheDuVisiteurMoisAnnee" + id).html();
-        //alert(numligne + ' ' + nom + ' ' + prenom + ' ' + moisAnnee);	
      
         $.post("./ajax/script_validation_fichefrais.php",
             {          

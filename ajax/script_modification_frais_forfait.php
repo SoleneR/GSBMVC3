@@ -5,7 +5,7 @@
 	$pdo = PdoGsb::getPdoGsb();
 	extract($_POST);
 
-    // Execution de la fonction permettant de changer l'état de la fiche frais en Validée
+    // lancement de la fonction permettant de mettre la fiche de frais en validée
  	$validerModificationFraisForfait = $pdo->updateLigneFraisForfaitAvecMontantsModifies($montantETP, $montantKM, $montantNUI, $montantREP);
 	//$validerModificationFraisForfait = 1;
 

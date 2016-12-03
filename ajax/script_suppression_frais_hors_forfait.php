@@ -5,6 +5,6 @@
 	$pdo = PdoGsb::getPdoGsb();
 	extract($_POST);
 
-    // Execution de la fonction permettant de changer l'état de la fiche frais en Validée
+    // lancement de la fonction permettant de mettre la fiche de frais en validée
  	$validerSuppressionFraisHorsForfait = $pdo->updateSuppressionLigneFraisHorsForfait($idLigneFraisHF, $motif);
 ?>
