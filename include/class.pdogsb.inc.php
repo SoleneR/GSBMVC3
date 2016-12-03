@@ -355,37 +355,31 @@ class PdoGsb{
 		$this->monPdo->exec($req);
 	}
 
-	// affiche tous les visiteurs avec une fiche à l'état cloturée
-        public function getTousVisiteursAvecFicheCloturee(){
-                $req = "SELECT * FROM fichefrais INNER JOIN visiteur ON idVisiteur = id WHERE idEtat = 'CL' ORDER BY visiteur.nom asc";
-                $res = $this->monPdo->query($req);
-		$laLigne = $res->fetchAll();
-		return $laLigne;
-        }
 
-     // affiche le montant, la quantité et le montant total par étape de la fiche frais
-    public function getTousInfosMontantFicheFraisForfait($idVisiteur, $mois)
+/**
+ * Retourne les utilisateurs pour lesquel un ou plusieurs mois ont  été cloturés
+ * @param  
+ * @return un tableau ASsociatif contenant l'id, le nom, le prenom, et le mois, l'année et la date
+*/
+	public function getLesFichesCloturees()
+	{
+		$req = "SELECT id, nom, prenom, SUBSTR(fichefrais.mois,1,4) AS an, SUBSTR(fichefrais.mois,5) AS mois, mois AS date FROM visiteur INNER JOIN fichefrais ON visiteur.id=fichefrais.idVisiteur WHERE idEtat= 'CL'
+		ORDER BY nom ASC, prenom DESC, date DESC";
+		$res = $this->monPdo->query($req);
+		$lesInfos = $res->fetchAll();
+		return $lesInfos;
+	}
+
+/**
+ * Modifie l'état de la fiche de frais pour la mettre en validée, met a jour la date et le montant
+ * Modifie le champ idEtat et montantValide
+ * @param $id,$date 
+ */
+    public function validerFicheFrais($id,$mois) //,$montantValide
     {
-    	$req = "SELECT id, libelle, quantite, montant, quantite * montant as montantCalculeParQuantite FROM fichefrais INNER JOIN lignefraisforfait ON fichefrais.idVisiteur = lignefraisforfait.idVisiteur INNER JOIN fraisforfait ON lignefraisforfait.idFraisForfait = fraisforfait.id WHERE fichefrais.idVisiteur = '".$idVisiteur."' AND fichefrais.mois = ".$mois." AND lignefraisforfait.mois = ".$mois;
-    	$res = $this->monPdo->query($req);
-		$laLigne = $res->fetchAll();
-		return $laLigne;
+        $req ="UPDATE fichefrais SET dateModif = NOW(), idEtat = 'VA' WHERE idVisiteur = '$id' AND mois = '$mois'"; //AND montantValide = $montantValide
+        $this->monPdo->exec($req);
     }
 
-    // affiche le montant et le libelle des frais hors forfait
-    public function getTousInfosMontantFicheFraisHorsForfait($idVisiteur, $mois)
-    {
-    	$req = "SELECT * FROM lignefraishorsforfait WHERE idVisiteur = '".$idVisiteur."' AND mois = ".$mois." AND supprime is null ORDER BY date";
-    	$res = $this->monPdo->query($req);
-		$laLigne = $res->fetchAll();
-		return $laLigne;
-    }
-
-    //changer l'état de la fiche frais en validée
-    public function changeEtatFicheFraisToValidate($idVisiteur, $mois, $montantTotal)
-    {
-    	$req = "UPDATE fichefrais set idEtat = 'VA', dateModif = now(), montantValide = ".$montantTotal." WHERE idVisiteur = '".$idVisiteur."' AND mois = ".$mois;
-		$this->monPdo->exec($req);
-    }
 }
 ?>

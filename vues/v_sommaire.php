@@ -24,7 +24,7 @@
            ?>
            
            <li>
-              <a href="index.php?uc=validerFrais&action=afficherFormulaireValidationFicheFrais" title="Validation de fiche de frais">Valider fiche de frais</a>
+              <a href='index.php?uc=validerFicheFrais&action=voirListeFichesFrais' title='Valider une fiche de frais'>Valider une fiche de frais</a>
            </li>
            
            <?php        
