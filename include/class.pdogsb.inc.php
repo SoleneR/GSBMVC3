@@ -325,6 +325,7 @@ class PdoGsb{
 		}
 		return $lesMois;
 	}
+
 /**
  * Retourne les informations d'une fiche de frais d'un visiteur pour un mois donné
  
@@ -340,6 +341,7 @@ class PdoGsb{
 		$laLigne = $res->fetch();
 		return $laLigne;
 	}
+
 /**
  * Modifie l'état et la date de modification d'une fiche de frais
  
@@ -347,7 +349,6 @@ class PdoGsb{
  * @param $idVisiteur 
  * @param $mois sous la forme aaaamm
  */
- 
 	public function majEtatFicheFrais($idVisiteur,$mois,$etat){
 		$req = "update ficheFrais set idEtat = '$etat', dateModif = now() 
 		where fichefrais.idvisiteur ='$idVisiteur' and fichefrais.mois = '$mois'";
@@ -361,5 +362,30 @@ class PdoGsb{
 		$laLigne = $res->fetchAll();
 		return $laLigne;
         }
+
+     // affiche le montant, la quantité et le montant total par étape de la fiche frais
+    public function getTousInfosMontantFicheFraisForfait($idVisiteur, $mois)
+    {
+    	$req = "SELECT id, libelle, quantite, montant, quantite * montant as montantCalculeParQuantite FROM fichefrais INNER JOIN lignefraisforfait ON fichefrais.idVisiteur = lignefraisforfait.idVisiteur INNER JOIN fraisforfait ON lignefraisforfait.idFraisForfait = fraisforfait.id WHERE fichefrais.idVisiteur = '".$idVisiteur."' AND fichefrais.mois = ".$mois." AND lignefraisforfait.mois = ".$mois;
+    	$res = $this->monPdo->query($req);
+		$laLigne = $res->fetchAll();
+		return $laLigne;
+    }
+
+    // affiche le montant et le libelle des frais hors forfait
+    public function getTousInfosMontantFicheFraisHorsForfait($idVisiteur, $mois)
+    {
+    	$req = "SELECT * FROM lignefraishorsforfait WHERE idVisiteur = '".$idVisiteur."' AND mois = ".$mois." AND supprime is null ORDER BY date";
+    	$res = $this->monPdo->query($req);
+		$laLigne = $res->fetchAll();
+		return $laLigne;
+    }
+
+    //changer l'état de la fiche frais en validée
+    public function changeEtatFicheFraisToValidate($idVisiteur, $mois, $montantTotal)
+    {
+    	$req = "UPDATE fichefrais set idEtat = 'VA', dateModif = now(), montantValide = ".$montantTotal." WHERE idVisiteur = '".$idVisiteur."' AND mois = ".$mois;
+		$this->monPdo->exec($req);
+    }
 }
 ?>

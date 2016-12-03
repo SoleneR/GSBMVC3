@@ -1,5 +1,5 @@
-<script src="./script/ajax.js"></script>
 <?php
+
 require_once("include/fct.inc.php");
 require_once ("include/class.pdogsb.inc.php");
 include("vues/v_entete.php") ;
@@ -20,11 +20,11 @@ switch($uc){
 	case 'etatFrais' :{
 		include("controleurs/c_etatFrais.php");break; 
 	}
-        case 'suivrePaiement' :{
+    case 'suivrePaiement' :{
 		include("controleurs/c_suivrePaiement.php");break; 
 	}
 	case 'validerFrais' :{
-                include("controleurs/c_validerFrais.php");break;
+        include("controleurs/c_validerFrais.php");break;
         }
 }
 include("vues/v_pied.php") ;
