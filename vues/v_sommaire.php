@@ -9,13 +9,19 @@
         </h4>
            
         <ul class="list-unstyled">
-			
+			   <?php 
+            if($_SESSION['type'] == 'V')
+        {
+           ?>
            <li>
               <a href="index.php?uc=gererFrais&action=saisirFrais" title="Saisie fiche de frais ">Saisie fiche de frais</a>
            </li>
            <li>
               <a href="index.php?uc=etatFrais&action=selectionnerMois" title="Consultation de mes fiches de frais">Mes fiches de frais</a>
            </li>
+          <?php        
+          }
+           ?>
            
            <!-- Si l'utilisateur est un comptable alors afficher cette fonctionnalité -->
            <?php 
