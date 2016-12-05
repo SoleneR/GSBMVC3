@@ -97,23 +97,23 @@ class PdoGsb{
         }
 
 /**
- * Retourne sous forme d'un tableau associatif toutes les lignes de frais hors forfait
+ * Retourne sous forme d'un tableau ASsociatif toutes les lignes de frais hors forfait
  * concernées par les deux arguments
- 
- * La boucle foreach ne peut être utilisée ici car on procède
+ * La boucle foreach ne peut être utilisée ici car ON procède
  * à une modification de la structure itérée - transformation du champ date-
- 
  * @param $idVisiteur 
  * @param $mois sous la forme aaaamm
- * @return tous les champs des lignes de frais hors forfait sous la forme d'un tableau associatif 
+ * @return tous les champs des lignes de frais hors forfait sous la forme d'un tableau ASsociatif 
 */
-	public function getLesFraisHorsForfait($idVisiteur,$mois){
-	    $req = "select * from lignefraishorsforfait where lignefraishorsforfait.idvisiteur ='$idVisiteur' 
-		and lignefraishorsforfait.mois = '$mois' ";	
+	public function getLesFraisHorsForfait($idVisiteur,$mois)
+	{
+	    $req = "SELECT * FROM lignefraishorsforfait WHERE lignefraishorsforfait.idvisiteur ='$idVisiteur' 
+		AND lignefraishorsforfait.mois = '$mois' AND supprime = '0'";	
 		$res = $this->monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		$nbLignes = count($lesLignes);
-		for ($i=0; $i<$nbLignes; $i++){
+		for ($i=0; $i<$nbLignes; $i++)
+		{
 			$date = $lesLignes[$i]['date'];
 			$lesLignes[$i]['date'] =  dateAnglaisVersFrancais($date);
 		}
