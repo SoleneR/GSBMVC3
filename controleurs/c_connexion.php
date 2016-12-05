@@ -11,25 +11,27 @@ switch($action){
 	case 'valideConnexion':{
 		$login = $_REQUEST['login'];
 		$mdp = md5($_REQUEST['mdp']);
-                
                                
-            $info =$pdo->getInfosVisiteur($login,$mdp);
+                $info =$pdo->getInfosVisiteur($login,$mdp);
+                
            
-             if($info['type']== 'V')
-             {
+            if($info['type']== 'V')
+            {
                  $visiteur = $pdo->getConnexionVisiteur($login,$mdp);
                         $id = $visiteur['idVisit'];
 			$nom =  $visiteur['nom'];
 			$prenom = $visiteur['prenom'];
                         $derniereCo = $visiteur['derniereConnexion'];
-			 $type = $visiteur['type'];
-			connecter($id,$nom,$prenom,$type,$derniereCo);
+			$type = $visiteur['type'];
+			
+                        connecter($id,$nom,$prenom,$type,$derniereCo);
 			
                         $pdo->UpdateDate($login);
                         include("vues/v_sommaire.php");
 		
-             }    
-             else if ($info['type']== 'C'){
+            }    
+            else if ($info['type']== 'C')
+            {
                  $comptable = $pdo->getConnexionComptable($login,$mdp);
 			$id = $comptable['id'];
 			$nom =  $comptable['nom'];
@@ -39,12 +41,14 @@ switch($action){
                         
 			connecter($id,$nom,$prenom,$type,$derniereCo);
 			
-                        $pdo->UpdateDate($id);
+                        $pdo->UpdateDate($login);
                         include("vues/v_sommaire.php");
 		
-                }
-            else{               
-			ajouterErreur("Login ou mot de passe incorrect","connexion");
+            }
+            else
+            {               
+		msgErreurCnx("connexion");
+                include("vues/v_connexion.php");
             }
             
             break;

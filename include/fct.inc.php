@@ -197,10 +197,10 @@ function afficheValidationVisiteur($login, $mdp, $id, $nom, $prenom, $adresse, $
  */
 function ajouterErreur($msg, $form){
    if (! isset($_REQUEST['erreurs'])){
-      $_REQUEST['erreurs']=array();
+     $_REQUEST['erreurs']=array();
       $_REQUEST['erreurForm']=$form;
 	} 
-   $_REQUEST['erreurs'][]=$msg;
+   $_REQUEST['erreurs'][]=$msg; 
 }
 /**
  * Retoune le nombre de lignes du tableau des erreurs 
@@ -214,5 +214,12 @@ function nbErreurs(){
 	else{
 	   return count($_REQUEST['erreurs']);
 	}
+}
+
+
+function msgErreurCnx(){
+    echo '<h3 class="text-danger">Erreur de login/mot de passe</h3>';
+    
+    
 }
 ?>
