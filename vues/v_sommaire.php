@@ -42,7 +42,7 @@
            {
            ?>
            <li>
-              <a href="index.php?uc=inscriptionNouveauVisiteur&action=demandeInscription" title="inscription">Inscription nouveau visiteur</a>
+              <a href="index.php?uc=inscriptionNouveauVisiteur&action=demandeInscription" title="inscription">Inscription d'un visiteur</a>
            </li>
            <?php
            }
