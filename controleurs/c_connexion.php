@@ -22,8 +22,8 @@ switch($action){
 			$nom =  $visiteur['nom'];
 			$prenom = $visiteur['prenom'];
                         $derniereCo = $visiteur['derniereConnexion'];
-			 
-			connecter($id,$nom,$prenom,$derniereCo);
+			 $type = $visiteur['type'];
+			connecter($id,$nom,$prenom,$type,$derniereCo);
 			
                         $pdo->UpdateDate($id);
                         include("vues/v_sommaire.php");
@@ -34,9 +34,10 @@ switch($action){
 			$id = $comptable['id'];
 			$nom =  $comptable['nom'];
 			$prenom = $comptable['prenom'];
+                        $type = $comptable['type'];
                         $derniereCo = $comptable['derniereConnexion'];
                         
-			connecter($id,$nom,$prenom,$derniereCo);
+			connecter($id,$nom,$prenom,$type,$derniereCo);
 			
                         $pdo->UpdateDate($id);
                         include("vues/v_sommaire.php");

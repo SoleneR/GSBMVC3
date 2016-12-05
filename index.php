@@ -1,4 +1,5 @@
 <?php
+
 require_once("include/fct.inc.php");
 require_once ("include/class.pdogsb.inc.php");
 include("vues/v_entete.php") ;
@@ -19,9 +20,19 @@ switch($uc){
 	case 'etatFrais' :{
 		include("controleurs/c_etatFrais.php");break; 
 	}
-        case 'inscriptionNouveauVisiteur' :{
-                include("controleurs/c_inscriptionVisiteur.php");break;         
-        }
+    case 'suivrePaiement' :{
+		include("controleurs/c_suivrePaiement.php");break; 
+	}
+    case 'validerFicheFrais':
+    {
+        include("controleurs/c_validerFicheFrais.php");
+        break;
+	}    
+	case 'modifierFraisForfaitises':
+    {
+        include("controleurs/c_validerFicheFrais.php");
+        break;
+	}
 }
 include("vues/v_pied.php") ;
 ?>
