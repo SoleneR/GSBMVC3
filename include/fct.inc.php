@@ -177,6 +177,19 @@ function valideInfosFrais($dateFrais,$libelle,$montant){
 			ajouterErreur("Le champ montant doit être numérique","HorsForfait");
 		}
 }
+//Affichage des information du visiteur lors de son inscription
+function afficheValidationVisiteur($login, $mdp, $id, $nom, $prenom, $adresse, $cp, $ville, $dateEmbauche){
+    
+    echo " login : ".$login."<br>Mot de passe : ".$mdp."<BR>";
+    echo " Prenom : ".$prenom."<BR>";
+    echo " Nom : ".$nom."<BR>";
+    echo " Nom : ".$adresse."<BR>";
+    echo " Nom : ".$cp."<BR>";
+    echo " Nom : ".$ville."<BR>";
+    echo " Nom : ".$dateEmbauche."<BR>";
+    echo " login : ".$login."<br>Mot de passe : ".$mdp."<BR>";
+    echo "Votre nouveau visiteur a bien été enregistré ";  
+}
 /**
  * Ajoute le libellé d'une erreur au tableau des erreurs 
  

@@ -59,6 +59,7 @@ class PdoGsb{
 		$ligne = $rs->fetch();
 		return $ligne;
 	}
+
         
         public function getIdVisiteur($id){
             $req = "select id from visiteur";
@@ -95,7 +96,21 @@ class PdoGsb{
                    where login='$login'";
             $rs = $this->monPdo->exec($req);
         }
+        
+        //Ajout d'un visiteur 
+        function inscriptionVisiteur($id,$nom, $prenom,$login, $adresse, $cp, $ville, $dateEmbauche){
+           
+            $req = "insert into visiteur (id, nom,prenom,login,adresse,cp,ville, dateEmbauche)
+                     values ('$id','$nom', '$prenom','$login','$adresse','$cp','$ville','$dateEmbauche')";
+            $rs = $this->monPdo->query($req);
+        }
 
+         function insertionUtilisateur($login, $mdp){
+            
+            $req = " insert into utilisateur (login, mdp,type)
+                     VALUES ('$login', md5('$mdp'),'V')";
+            $rs = $this->monPdo->query($req);
+        }
 /**
  * Retourne sous forme d'un tableau ASsociatif toutes les lignes de frais hors forfait
  * concernées par les deux arguments

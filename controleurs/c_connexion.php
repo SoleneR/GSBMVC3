@@ -10,7 +10,7 @@ switch($action){
 	}
 	case 'valideConnexion':{
 		$login = $_REQUEST['login'];
-		$mdp = $_REQUEST['mdp'];
+		$mdp = md5($_REQUEST['mdp']);
                 
                                
             $info =$pdo->getInfosVisiteur($login,$mdp);
@@ -25,7 +25,7 @@ switch($action){
 			 $type = $visiteur['type'];
 			connecter($id,$nom,$prenom,$type,$derniereCo);
 			
-                        $pdo->UpdateDate($id);
+                        $pdo->UpdateDate($login);
                         include("vues/v_sommaire.php");
 		
              }    
