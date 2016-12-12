@@ -282,9 +282,8 @@ class PdoGsb{
 		$this->monPdo->exec($req);
 	}
         
-//        affichage pour un visiteur des fiches de frais des 12 derniers mois qui sont validés ou remboursés 
-        public function getLesVisiteursASuivre(){
-            //VA RB
+        // affichage pour un visiteur des fiches de frais des 12 derniers mois qui sont validés ou remboursés 
+        public function getLesVisiteursASuivre(){ 
             $req ="select visiteur.id, visiteur.nom , fichefrais.idVisiteur,fichefrais.mois "
                     . "from Etat inner join fichefrais on Etat.id = fichefrais.idEtat"
                     . " inner join visiteur on fichefrais.idVisiteur = visiteur.id where fichefrais.idEtat ='VA' OR fichefrais.idEtat ='RB'"
@@ -295,7 +294,7 @@ class PdoGsb{
         }
         
           public function getFichesFraisUtilisateurSuiviePaiement($idVisiteur){
-             $req = "SELECT * FROM fichefrais WHERE idVisiteur = '".$idVisiteur."' AND (idEtat = 'VA' || idEtat = 'RB') ORDER BY `fichefrais`.`mois` DESC LIMIT 0 , 12";
+             $req = "SELECT * FROM fichefrais INNER JOIN lignefraishorsforfait ON fichefrais.idVisiteur = lignefraishorsforfait.idVisiteur WHERE fichefrais.idVisiteur = '".$idVisiteur."' AND (idEtat = 'VA' || idEtat = 'RB') ORDER BY `fichefrais`.`mois` DESC LIMIT 0 , 12";
              $res = $this->monPdo->query($req);
              return $res;
         
