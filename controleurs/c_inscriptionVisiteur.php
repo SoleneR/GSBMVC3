@@ -1,4 +1,5 @@
 <?php
+include("vues/v_sommaire.php");
 
     if (!isset($_REQUEST['action'])) 
     {
@@ -26,11 +27,15 @@
             $n=rand(0,120); 
             $mdp=$mdp.chr($n);
         }
-        
-    $pdo->insertionUtilisateur($login, $mdp, $id);
+       
+    
+    
+    $pdo->insertionUtilisateur($login, $mdp);
     $pdo->inscriptionVisiteur($id,$nom, $prenom,$login ,$adresse, $cp, $ville, $dateEmbauche); 
     afficheValidationVisiteur($login, $mdp, $id, $nom, $prenom, $adresse, $cp, $ville, $dateEmbauche);
+    include("vues/v_boutonRetour.php");
     }
+    
     
     else{
         alert("Erreur de création du nouveau visiteur");

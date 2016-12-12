@@ -1,6 +1,4 @@
-<div class="row">
-               
-    <div class ="col-md-12 col-md-offset-2" id="contenu">
+
 <?php 
 if (isset($_REQUEST['erreurs'])) 
     {    
@@ -69,6 +67,3 @@ if (isset($_REQUEST['erreurs']))
           <button type="reset" class="btn btn-primary">Retour</button>
          </fieldset>
       </form>
-
-    </div>
-</div>
