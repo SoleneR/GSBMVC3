@@ -177,6 +177,19 @@ function valideInfosFrais($dateFrais,$libelle,$montant){
 			ajouterErreur("Le champ montant doit être numérique","HorsForfait");
 		}
 }
+//Affichage des information du visiteur lors de son inscription
+function afficheValidationVisiteur($login, $mdp, $id, $nom, $prenom, $adresse, $cp, $ville, $dateEmbauche){
+    
+    echo " login : ".$login."<br>Mot de passe : ".$mdp."<BR>";
+    echo " Prenom : ".$prenom."<BR>";
+    echo " Nom : ".$nom."<BR>";
+    echo " Nom : ".$adresse."<BR>";
+    echo " Nom : ".$cp."<BR>";
+    echo " Nom : ".$ville."<BR>";
+    echo " Nom : ".$dateEmbauche."<BR>";
+    echo " login : ".$login."<br>Mot de passe : ".$mdp."<BR>";
+    echo "Votre nouveau visiteur a bien été enregistré ";  
+}
 /**
  * Ajoute le libellé d'une erreur au tableau des erreurs 
  
@@ -184,10 +197,10 @@ function valideInfosFrais($dateFrais,$libelle,$montant){
  */
 function ajouterErreur($msg, $form){
    if (! isset($_REQUEST['erreurs'])){
-      $_REQUEST['erreurs']=array();
+     $_REQUEST['erreurs']=array();
       $_REQUEST['erreurForm']=$form;
 	} 
-   $_REQUEST['erreurs'][]=$msg;
+   $_REQUEST['erreurs'][]=$msg; 
 }
 /**
  * Retoune le nombre de lignes du tableau des erreurs 
@@ -202,4 +215,13 @@ function nbErreurs(){
 	   return count($_REQUEST['erreurs']);
 	}
 }
+
+
+function msgErreurCnx(){
+    echo '<h3 class="text-danger">Erreur de login/mot de passe</h3>';
+    
+    
+}
+
+
 ?>

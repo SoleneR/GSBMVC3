@@ -4,13 +4,24 @@
     <nav class='col-md-2'>
         
         <h4>
-            <?php echo $_SESSION['prenom']."  ".$_SESSION['nom']?>
+            <?php
+            if($_SESSION['type'] == 'C')
+            {
+               $_SESSION['type'] = 'Comptable';
+               echo $_SESSION['prenom']."  ".$_SESSION['nom'] ." ".$_SESSION['type'];
+            }
+            elseif ($_SESSION['type'] == 'V')
+            {
+               $_SESSION['type'] = 'Visiteur';
+               echo $_SESSION['prenom']."  ".$_SESSION['nom'] ." ".$_SESSION['type'] ; 
+            }
+             ?>
             
         </h4>
            
         <ul class="list-unstyled">
 			   <?php 
-            if($_SESSION['type'] == 'V')
+            if($_SESSION['type'] == 'Visiteur')
         {
            ?>
            <li>
@@ -25,7 +36,7 @@
            
            <!-- Si l'utilisateur est un comptable alors afficher cette fonctionnalité -->
            <?php 
-            if($_SESSION['type'] == 'C')
+            if($_SESSION['type'] == 'Comptable')
             {
            ?>
            
@@ -38,17 +49,17 @@
            ?>          
            <?php
           // $info =$pdo->getInfosVisiteur($login,$mdp);
-           if($_SESSION['type'] == 'C')
+           if($_SESSION['type'] == 'Comptable')
            {
            ?>
            <li>
-              <a href="index.php?uc=inscriptionNouveauVisiteur&action=demandeInscription" title="inscription">Inscription nouveau visiteur</a>
+              <a href="index.php?uc=inscriptionNouveauVisiteur&action=demandeInscription" title="inscription">Inscription d'un visiteur</a>
            </li>
            <?php
            }
            ?>
             <?php 
-           if($_SESSION['type'] == "C")
+           if($_SESSION['type'] == "Comptable")
           {
                ?>
            <li>

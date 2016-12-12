@@ -6,7 +6,7 @@ if (isset($_REQUEST['erreurs']))
     {    
         foreach($_REQUEST['erreurs'] as $erreur)
             {
-             echo '<h3 class="text-danger">'.$erreur.'</h3>';
+            echo '<h3 class="text-danger">'.$erreur.'</h3>';
             }
      }
 ?>

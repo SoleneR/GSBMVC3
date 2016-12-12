@@ -1,6 +1,6 @@
 <?php 
 //version comptable
-if($_SESSION['type']=='C')
+if($_SESSION['type']=='Comptable')
 {
   echo '<h2>Fiche de frais du mois ' . $numMois."-". $numAnnee . " de " . $prenomVisiteur . " " . $nomVisiteur . '     ' ;
   echo "<a href='index.php?uc=validerFicheFrais&action=validerFicheFrais&id=$leId&date=$laDate' class='btn btn-primary btn-sm' role='button'>Valider la fiche</a>" .'</h2>';
