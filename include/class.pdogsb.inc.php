@@ -120,6 +120,7 @@ class PdoGsb{
             
         }
 
+        //Ajout d'un utilisateur
          function insertionUtilisateur($login, $mdp){
             $req = " insert into utilisateur (login, mdp,type)
                      VALUES ('$login', md5('$mdp'),'V')";
