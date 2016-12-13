@@ -150,3 +150,7 @@ table caption {
   float : left;
 
 }
+
+.deleted {
+    background-color: #red;
+}
