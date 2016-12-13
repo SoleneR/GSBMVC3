@@ -19,8 +19,9 @@ include("vues/v_sommaire.php");
                 $cp = $_REQUEST['cp'];
                 $ville = $_REQUEST['ville'];
                 $dateEmbauche = $_REQUEST['dateEmbauche'];
-     
-   if($id =! "" && $nom != "" && $prenom!=""){     
+                
+   $valide=$pdo->getIdVisiteur($id);    
+   if($valide=""){     
         $login = $prenom[0].$nom;                    
         $mdp="";
         for($i= 1;$i<=4;$i++){
@@ -37,10 +38,10 @@ include("vues/v_sommaire.php");
     
     
     else{
-        alert("Erreur de création du nouveau visiteur");
+        alert('Erreur de création du nouveau visiteur');
         
-    }  
+        }  
         }
-}
+    }
 ?>
 

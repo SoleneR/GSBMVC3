@@ -56,20 +56,21 @@ class PdoGsb{
  * @return l'id, le nom et le prénom sous la forme d'un tableau associatif 
 */
 	public function getInfosVisiteur($login, $mdp){
-		$req = "SELECT * FROM utilisateur
-		where login=:login and mdp=:mdp";
-		$rs = $this->monPdo->prepare($req);
-		$rs->bindParam(':login', $login); 
-        $rs->bindParam(':mdp', $mdp);
-        $rs->execute();
-		$ligne = $rs->fetch();
-		return $ligne;
+            $req = "SELECT * FROM utilisateur where login=:login and mdp=:mdp";
+            $rs = $this->monPdo->prepare($req);
+            $rs->bindParam(':login', $login); 
+            $rs->bindParam(':mdp', $mdp);
+            $rs->execute();
+            $ligne = $rs->fetch();
+            return $ligne;
 	}
 
         
         public function getIdVisiteur($id){
-            $req = "SELECT id FROM visiteur";
-            $rs = $this->monPdo->query($req);
+            $req = "SELECT * FROM visiteur where id=:id";
+            $rs = $this->monPdo->prepare($req);
+            $rs->bindParam(':id', $id); 
+            $rs->execute();
             $ligne = $rs->fetch();
             return $ligne;
         }
