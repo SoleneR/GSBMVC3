@@ -67,9 +67,8 @@ class PdoGsb{
 
         
         public function getIdVisiteur($id){
-            $req = "SELECT * FROM visiteur where id=:id";
+            $req = "SELECT id FROM visiteur";
             $rs = $this->monPdo->prepare($req);
-            $rs->bindParam(':id', $id); 
             $rs->execute();
             $ligne = $rs->fetch();
             return $ligne;
