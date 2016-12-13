@@ -110,19 +110,21 @@ class PdoGsb{
             $rs = $this->monPdo->exec($req);
         }
         
+
         //Ajout d'un visiteur 
         function inscriptionVisiteur($id,$nom, $prenom,$login, $adresse, $cp, $ville, $dateEmbauche){
-           
-            $req = "insert into visiteur (id, nom,prenom,login,adresse,cp,ville, dateEmbauche)
+           $req = "insert into visiteur (id, nom,prenom,login,adresse,cp,ville, dateEmbauche)
                      values ('$id','$nom', '$prenom','$login','$adresse','$cp','$ville','$dateEmbauche')";
-            $rs = $this->monPdo->query($req);
+            $rs = $this->monPdo->query($req); 
+           
+            
         }
 
          function insertionUtilisateur($login, $mdp){
-            
             $req = " insert into utilisateur (login, mdp,type)
                      VALUES ('$login', md5('$mdp'),'V')";
             $rs = $this->monPdo->query($req);
+           
         }
 /**
  * Retourne sous forme d'un tableau associatif toutes les lignes de frais hors forfait

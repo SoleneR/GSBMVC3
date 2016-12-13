@@ -29,7 +29,6 @@ include("vues/v_sommaire.php");
         }
        
     
-    
     $pdo->insertionUtilisateur($login, $mdp);
     $pdo->inscriptionVisiteur($id,$nom, $prenom,$login ,$adresse, $cp, $ville, $dateEmbauche); 
     afficheValidationVisiteur($login, $mdp, $id, $nom, $prenom, $adresse, $cp, $ville, $dateEmbauche);
